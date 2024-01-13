@@ -1,0 +1,45 @@
+{
+  "extends": "next/core-web-vitals",
+  "plugins": ["simple-import-sort"],
+  "rules": {
+    "react-hooks/exhaustive-deps": "off",
+    "react/prop-types": [
+      2,
+      {
+        "ignore": ["className", "align", "sideOffset", "cmdk-input-wrapper"]
+      }
+    ],
+    "react/no-unknown-property": [
+      2,
+      {
+        "ignore": ["cmdk-input-wrapper"]
+      }
+    ],
+    "simple-import-sort/imports": [
+      "error",
+      {
+        "groups": [
+          ["^react", "^react-native"],
+          ["^\\u0000$"],
+          ["^@?\\w"],
+          ["^\\u0000$"],
+          [
+            "^@screens",
+            "^@routes",
+            "^@assets",
+            "^@models",
+            "^@contexts",
+            "^@services"
+          ],
+          ["^\\u0000$"],
+          ["^lucide-react-native"],
+          ["^\\u0000$"],
+          ["^@theme"],
+          ["^\\u0000$"],
+          ["^@components"]
+        ]
+      }
+    ],
+    "simple-import-sort/exports": "error"
+  }
+}
