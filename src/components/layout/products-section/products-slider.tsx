@@ -1,8 +1,6 @@
 "use client";
-import { Suspense } from "react";
 import Slider, { Settings } from "react-slick";
 
-import ProductsCardLoading from "./loading/products-card-loading";
 import { ProductsCard } from "./products-card";
 import { GameWithRating } from "@/types/games";
 
@@ -17,14 +15,38 @@ export function ProductsSlider({ products }: ProductsSliderProps) {
     slidesToShow: 5,
     draggable: false,
     slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 4,
+        },
+      },
+      {
+        breakpoint: 900,
+        settings: {
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 400,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
   };
 
   return (
     <Slider {...sliderSettings}>
       {products.map((product) => (
-        <Suspense key={product.id} fallback={<ProductsCardLoading />}>
-          <ProductsCard product={product} />
-        </Suspense>
+        <ProductsCard key={product.id} product={product} />
       ))}
     </Slider>
   );

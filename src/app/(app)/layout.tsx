@@ -9,7 +9,7 @@ export default function HomeLayout({ children }: HomeLayoutProps) {
   return (
     <>
       <Header />
-      {children}
+      <main className="mx-auto max-w-6xl px-2">{children}</main>
       <Footer />
     </>
   );

@@ -11,15 +11,14 @@ type HeroCarrouselCardProps = {
 
 export default function HeroCarrouselCard({ game }: HeroCarrouselCardProps) {
   return (
-    <div className="h-hero-carrousel relative">
+    <div className="relative h-hero-carrousel">
       <Image
         priority
         src={game.banner_img}
         alt={game.name}
-        height={0}
-        width={0}
-        sizes="100vw"
-        className="h-full w-full rounded-lg object-cover brightness-[.4]"
+        height={460}
+        width={680}
+        className="h-full w-full object-cover brightness-[.4]"
       />
 
       <div className="absolute bottom-8 left-8 flex flex-col gap-2">

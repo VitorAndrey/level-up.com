@@ -27,14 +27,14 @@ export default function HeroCarrouselContainer({
   };
 
   return (
-    <div className="h-hero-carrousel md:flex md:gap-2">
+    <div className="flex gap-4">
       <HeroCarrousel
         promotions={promotions}
         currentSlideIndex={currentIndex}
         onAnimationChange={handleChange}
       />
 
-      <div className="no-scrollbar flex gap-2 overflow-x-auto p-2 child:flex child:flex-1 md:w-60 md:flex-col">
+      <div className="no-scrollbar hidden w-60 flex-col gap-2 overflow-x-auto child:flex child:flex-1 md:flex">
         {promotions.map((game, index) => (
           <HeroPromoCard
             key={game.id}

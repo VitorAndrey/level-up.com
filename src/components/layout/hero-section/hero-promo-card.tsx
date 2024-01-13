@@ -27,7 +27,8 @@ export function HeroPromoCard({
 
     if (index === currentIndex) {
       setIsActive(true);
-      animationRef.current.style.animation = "fillAnimation 6s linear forwards";
+      animationRef.current.style.animation =
+        "fillAnimation 10s linear forwards";
     } else {
       setIsActive(false);
       animationRef.current.style.animation = "none";
@@ -46,7 +47,7 @@ export function HeroPromoCard({
     <button
       data-active={isActive}
       onClick={handleClick}
-      className="relative flex min-w-40 items-center gap-2 overflow-hidden rounded-xl p-2 hover:bg-zinc-100 data-[active=true]:bg-zinc-100 md:min-w-0"
+      className="relative flex min-w-40 items-center gap-2 overflow-hidden rounded-2xl p-3 hover:bg-zinc-100 data-[active=true]:bg-zinc-100 md:min-w-0"
     >
       <Image
         src={imageUrl}

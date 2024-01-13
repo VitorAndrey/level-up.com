@@ -10,7 +10,7 @@ export default function AppProvider({ children }: AppProviderProps) {
   return (
     <ShoppingCartContextProvider>
       <NextAuthProvider>
-        <ThemeProvider attribute="class" defaultTheme="light">
+        <ThemeProvider attribute="class" defaultTheme="dark">
           {children}
         </ThemeProvider>
       </NextAuthProvider>
