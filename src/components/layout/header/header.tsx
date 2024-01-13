@@ -5,7 +5,7 @@ import { LevelUpLogo } from "@/components/ui/level-up-logo";
 
 export function Header() {
   return (
-    <header className="flex h-[4.5rem] items-center justify-between border-b px-8">
+    <header className="flex h-[4.5rem] items-center justify-between border-b px-4 md:px-8">
       <div className="flex items-center gap-1">
         <LevelUpLogo />
         <h2 className="text-lg font-semibold">Level Up</h2>

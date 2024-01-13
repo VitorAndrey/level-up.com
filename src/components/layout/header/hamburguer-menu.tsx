@@ -37,7 +37,7 @@ export function HamburguerMenu() {
       </SheetTrigger>
 
       <SheetContent className="flex flex-col">
-        <SheetHeader className="-mt-2">
+        <SheetHeader className="-mt-1">
           <ThemeToggle />
         </SheetHeader>
 

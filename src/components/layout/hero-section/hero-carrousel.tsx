@@ -37,7 +37,7 @@ export function HeroCarrousel({
   return (
     <Slider
       ref={carrouselRef}
-      className="hero-carrousel w-[calc(100%-248px)]"
+      className="h-hero-carrousel md:w-[calc(100%-248px)]"
       {...sliderSettings}
     >
       {promotions.map((game) => (

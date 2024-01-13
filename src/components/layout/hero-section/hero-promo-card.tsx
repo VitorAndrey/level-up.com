@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import Image from "next/image";
 
@@ -19,14 +19,17 @@ export function HeroPromoCard({
   onAnimationChange,
   onAnimationComplete,
 }: HeroPromoCardProps) {
+  const [isActive, setIsActive] = useState<boolean>(false);
   const animationRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!animationRef.current) return;
 
     if (index === currentIndex) {
+      setIsActive(true);
       animationRef.current.style.animation = "fillAnimation 6s linear forwards";
     } else {
+      setIsActive(false);
       animationRef.current.style.animation = "none";
     }
   }, [index, currentIndex]);
@@ -41,8 +44,9 @@ export function HeroPromoCard({
 
   return (
     <button
+      data-active={isActive}
       onClick={handleClick}
-      className="relative flex min-w-40 items-center gap-2 overflow-hidden p-2 md:min-w-0"
+      className="relative flex min-w-40 items-center gap-2 overflow-hidden rounded-xl p-2 hover:bg-zinc-100 data-[active=true]:bg-zinc-100 md:min-w-0"
     >
       <Image
         src={imageUrl}
@@ -57,7 +61,7 @@ export function HeroPromoCard({
       <div
         ref={animationRef}
         onAnimationEnd={handleAnimationEnd}
-        className="absolute inset-0 rounded-lg bg-zinc-300"
+        className="absolute inset-0 rounded-xl bg-zinc-300"
         style={{
           width: "0%",
         }}
