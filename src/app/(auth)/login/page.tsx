@@ -5,8 +5,8 @@ import * as React from "react";
 import { Loader2Icon } from "lucide-react";
 import Link from "next/link";
 
-import GoogleAuthBtn from "@/components/google-auth-btn";
 import { Button, buttonVariants } from "@/components/ui/button";
+import GoogleAuthBtn from "@/components/ui/google-auth-btn";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";

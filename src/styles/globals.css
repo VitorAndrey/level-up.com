@@ -86,3 +86,12 @@
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes fillAnimation {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}

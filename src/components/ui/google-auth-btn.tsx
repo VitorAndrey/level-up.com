@@ -2,7 +2,7 @@ import { Loader2Icon } from "lucide-react";
 import Image from "next/image";
 import { signIn } from "next-auth/react";
 
-import googleLogo from "../../public/google-icon-logo.svg";
+import googleLogo from "../../../public/google-icon-logo.svg";
 import { Button } from "./button";
 import { LoadingObjectType } from "@/app/(auth)/login/page";
 
