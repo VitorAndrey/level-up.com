@@ -25,21 +25,17 @@ export function HeroPromoCard({
     if (!animationRef.current) return;
 
     if (index === currentIndex) {
-      // Inicia a animação quando o componente é montado
       animationRef.current.style.animation = "fillAnimation 6s linear forwards";
     } else {
-      // Limpa a animação quando não estiver animando
       animationRef.current.style.animation = "none";
     }
   }, [index, currentIndex]);
 
   const handleAnimationEnd = () => {
-    // Chama a função de retorno quando a animação é concluída
     onAnimationComplete();
   };
 
   const handleClick = () => {
-    // Muda o índice da animação ao clicar no botão
     onAnimationChange(index);
   };
 

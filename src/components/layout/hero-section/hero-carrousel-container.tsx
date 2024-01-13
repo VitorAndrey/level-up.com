@@ -13,23 +13,26 @@ type HeroCarrouselContainerProps = {
 export default function HeroCarrouselContainer({
   promotions,
 }: HeroCarrouselContainerProps) {
-  const [currentAnimationIndex, setCurrentAnimationIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const handleAnimationChange = (index: number) => {
-    setCurrentAnimationIndex(index);
+  const handleChange = (index: number) => {
+    setCurrentIndex(index);
   };
 
-  const handleAnimationComplete = () => {
-    setCurrentAnimationIndex((prevIndex) => {
+  const handleComplete = () => {
+    setCurrentIndex((prevIndex) => {
       const nextIndex = (prevIndex + 1) % promotions.length;
-
       return nextIndex;
     });
   };
 
   return (
     <div className="h-hero-carrousel md:flex md:gap-2">
-      <HeroCarrousel promotions={promotions} />
+      <HeroCarrousel
+        promotions={promotions}
+        currentSlideIndex={currentIndex}
+        onAnimationChange={handleChange}
+      />
 
       <div className="no-scrollbar flex gap-2 overflow-x-auto p-2 child:flex child:flex-1 md:w-60 md:flex-col">
         {promotions.map((game, index) => (
@@ -38,9 +41,9 @@ export default function HeroCarrouselContainer({
             game={game.name}
             imageUrl={game.cover_img_url}
             index={index}
-            currentIndex={currentAnimationIndex}
-            onAnimationChange={handleAnimationChange}
-            onAnimationComplete={handleAnimationComplete}
+            currentIndex={currentIndex}
+            onAnimationChange={handleChange}
+            onAnimationComplete={handleComplete}
           />
         ))}
       </div>
