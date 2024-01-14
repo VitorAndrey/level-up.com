@@ -5,8 +5,11 @@ import HeaderAuth from "./header-auth";
 import HeaderLogo from "./header-logo";
 import { HeaderSearchBar } from "./header-search-bar";
 import HeaderShoppingCart from "./header-shoppingCart";
+import { getGames } from "@/services/games/getGames";
 
-export function Header() {
+export async function Header() {
+  const products = await getGames();
+
   return (
     <>
       <header className="flex h-[4.5rem] items-center justify-between border-b px-4 md:px-8">
@@ -25,7 +28,7 @@ export function Header() {
         </div>
       </header>
 
-      <HeaderSearchBar />
+      <HeaderSearchBar products={products} />
     </>
   );
 }

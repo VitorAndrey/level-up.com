@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Slider, { Settings } from "react-slick";
 
 import HeroCarrouselCard from "./hero-carrousel-card";
@@ -15,7 +15,6 @@ export function HeroCarrousel({
   currentSlideIndex,
   onAnimationChange,
 }: HeroCarrouselProps) {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const carrouselRef = useRef<Slider>(null);
 
   const sliderSettings: Settings = {
@@ -37,16 +36,6 @@ export function HeroCarrousel({
       carrouselRef.current.slickGoTo(currentSlideIndex);
     }
   }, [currentSlideIndex]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   return (
     <Slider
