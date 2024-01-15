@@ -1,6 +1,7 @@
 import { StarIcon } from "lucide-react";
 import Image from "next/image";
 
+import CommentsSection from "@/components/layout/CommentsSection";
 import { ProductsCarrousel } from "@/components/layout/products-section/products-carrousel";
 import { AddToCartButton } from "@/components/ui/add-to-cart-button";
 import { BuyNowButton } from "@/components/ui/buy-now-button";
@@ -79,7 +80,7 @@ export default async function GamesProductPage({ params }: ParamsTypes) {
         </div>
       </div>
 
-      <div className="py-12">Comments section</div>
+      <CommentsSection gameId={product.id} />
 
       <h3 className="mb-4 pl-2 text-lg font-semibold">Talvez você goste</h3>
       <ProductsCarrousel products={promotions} />
