@@ -1,15 +1,20 @@
 "use client";
 
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Button } from "./button";
 import { Game } from "@/types/games";
 import { ShoppingCartContext } from "@/contexts/ShoppingCartContext";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 type AddToCartButtonProps = {
   product: Game;
 };
 
 export function AddToCartButton({ product }: AddToCartButtonProps) {
+  const { data: session } = useSession();
+  const navigation = useRouter();
+
   const {
     handleAddShoppingCartItem,
     shoppingCart,
@@ -19,6 +24,10 @@ export function AddToCartButton({ product }: AddToCartButtonProps) {
   const alreadyInCart = shoppingCart.some((item) => item.id === product.id);
 
   function handleAddToCart() {
+    if (!session?.user) {
+      return navigation.push("/register");
+    }
+
     if (alreadyInCart) {
       handleRemoveShoppingCartItem(product.id);
     } else {
@@ -27,8 +36,8 @@ export function AddToCartButton({ product }: AddToCartButtonProps) {
   }
 
   return (
-    <Button onClick={handleAddToCart} variant="outline" className="w-full">
-      {alreadyInCart ? "Remover do carrinho" : "Adicionar o carrinho"}
+    <Button onClick={handleAddToCart} variant={"outline"} className="w-full">
+      {alreadyInCart ? "Remover do carrinho" : "Adicionar ao carrinho"}
     </Button>
   );
 }

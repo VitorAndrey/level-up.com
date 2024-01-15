@@ -14,8 +14,6 @@ export function ThemeToggle() {
     setTheme(theme === "light" ? "dark" : "light");
   }
 
-  console.log(theme);
-
   return (
     <Button variant="outline" size="icon" onClick={handleChangeTheme}>
       {theme === "light" ? (

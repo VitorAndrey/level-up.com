@@ -3,6 +3,7 @@ import Image from "next/image";
 
 import { AddToCartButton } from "@/components/ui/add-to-cart-button";
 import { Button } from "@/components/ui/button";
+import { BuyNowButton } from "@/components/ui/buy-now-button";
 import { getGameBySlug } from "@/services/games/getGamesBySlug";
 import { calcPrice } from "@/utils/calcPrice";
 
@@ -69,8 +70,10 @@ export default async function GamesProductPage({ params }: ParamsTypes) {
             <span>R${product.price}</span>
           )}
 
-          <Button className="mt-4 w-full">Compre Agora</Button>
-          <AddToCartButton product={product} />
+          <div className="mt-4 flex flex-col gap-2">
+            <BuyNowButton product={product} />
+            <AddToCartButton product={product} />
+          </div>
         </div>
       </div>
 
