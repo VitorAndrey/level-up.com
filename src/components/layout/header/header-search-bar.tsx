@@ -74,7 +74,7 @@ export function HeaderSearchBar({ products }: HeaderSearchBarProps) {
             placeholder="Pesquisar na loja"
           />
 
-          <div className="no-scrollbar flex h-full w-full flex-col overflow-hidden overflow-y-auto pb-8">
+          <div className="no-scrollbar flex h-full w-full flex-col justify-start overflow-hidden overflow-y-auto pb-8">
             {filteredList.map((product) => (
               <DialogClose
                 className="my-2 text-left"

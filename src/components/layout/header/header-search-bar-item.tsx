@@ -9,14 +9,15 @@ type HeaderSearchBarItemProps = {
 export function HeaderSearchBarItem({ product }: HeaderSearchBarItemProps) {
   return (
     <Link
-      className="flex items-center gap-2 rounded-lg border p-2"
+      className="flex items-center gap-3 rounded-lg border p-2"
       href={`/games/${product.slug}`}
     >
       <Image
         src={product.cover_img_url}
         alt={product.name}
-        height={20}
-        width={25}
+        height={40}
+        width={45}
+        className="h-12 w-8 object-cover"
       />
       <p>{product.name}</p>
     </Link>
