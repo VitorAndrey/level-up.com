@@ -1,6 +1,8 @@
-import { Game as PrismaGame } from "@prisma/client";
+import { Comment as PrismaComment, Game as PrismaGame } from "@prisma/client";
 
 export type Game = PrismaGame;
+export type Comment = PrismaComment;
+export type CreateComment = Omit<PrismaComment, "id">;
 
 type OmittedProps = "category" | "banner_img";
 type OmmitedPromotionsProps = "category" | "description";
