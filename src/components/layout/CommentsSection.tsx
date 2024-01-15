@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 import { createComment } from "@/services/posts/createComment";
 import { getComments } from "@/services/posts/getComments";
 import { Comment, CreateComment } from "@/types/games";
@@ -48,17 +49,17 @@ export default function CommentsSection({ gameId }: { gameId: string }) {
   }, []);
 
   return (
-    <div>
-      <form onSubmit={handleCrateComment}>
-        <input
+    <section className="py-8">
+      <form onSubmit={handleCrateComment} className="flex gap-2">
+        <Input
           value={commentInput}
           onChange={(e) => setCommentInput(e.target.value)}
           type="text"
           required
           placeholder="Deixe seu commentario"
-          className="rounded-lg border px-4 py-2"
+          className="w-full max-w-80 rounded-lg border px-4"
         />
-        <Button className="h-8" type="submit" variant="outline">
+        <Button type="submit" variant="outline">
           {isLoading ? (
             <LoaderIcon className="h-4 w-4 animate-spin" />
           ) : (
@@ -74,6 +75,6 @@ export default function CommentsSection({ gameId }: { gameId: string }) {
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 }
