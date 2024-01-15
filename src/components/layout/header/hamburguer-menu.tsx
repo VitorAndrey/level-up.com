@@ -1,20 +1,18 @@
 "use client";
 
-import {
-  BadgePlusIcon,
-  Bell,
-  LogOutIcon,
-  Menu,
-  PartyPopperIcon,
-  UserPlus2Icon,
-} from "lucide-react";
+import { useContext } from "react";
+
+import { LogOutIcon, Menu, XIcon } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { signOut, useSession } from "next-auth/react";
 
-import { Avatar } from "../../ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
 import { ScrollArea } from "../../ui/scroll-area";
 import { ThemeToggle } from "../../ui/theme-toggle";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { BuyNowButton } from "@/components/ui/buy-now-button";
 import {
   Sheet,
   SheetClose,
@@ -22,9 +20,15 @@ import {
   SheetHeader,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { ShoppingCartContext } from "@/contexts/ShoppingCartContext";
+import { cn } from "@/lib/utils";
+import { calcPrice } from "@/utils/calcPrice";
 
 export function HamburguerMenu() {
   const navigation = useRouter();
+  const { data: session } = useSession();
+  const { shoppingCart, handleRemoveShoppingCartItem } =
+    useContext(ShoppingCartContext);
 
   const pathname = usePathname();
 
@@ -41,76 +45,91 @@ export function HamburguerMenu() {
           <ThemeToggle />
         </SheetHeader>
 
-        <ScrollArea className="flex-1 pt-12">
-          <div className="mb-8 flex items-center">
-            <div className="flex flex-1 items-center gap-2">
-              <Avatar className="h-8 w-8 bg-red-200" />
+        <div className="my-2">
+          {session ? (
+            session.user && (
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Avatar className="h-10 w-10">
+                    <AvatarImage
+                      src={session.user.image || ""}
+                      alt={session.user.name || ""}
+                    />
+                    <AvatarFallback>LV</AvatarFallback>
+                  </Avatar>
 
-              <h3 className="truncate">Vitor Andrey</h3>
+                  <h3 className="truncate text-sm">{session.user.name}</h3>
+                </div>
+
+                <Button onClick={() => signOut()} size="icon" variant="ghost">
+                  <LogOutIcon className="h-5 w-5" />
+                </Button>
+              </div>
+            )
+          ) : (
+            <div className="hidden items-center gap-2 md:flex">
+              <Link
+                href={"/login"}
+                className={cn(buttonVariants({ variant: "link" }), "text-sm")}
+              >
+                login
+              </Link>
+              <Link
+                href={"/register"}
+                className={cn(buttonVariants({ variant: "default" }), "")}
+              >
+                Registar
+              </Link>
             </div>
+          )}
+        </div>
 
-            <SheetClose asChild>
-              <Button size="icon" variant="ghost">
-                <LogOutIcon className="h-5 w-5" />
+        <div className="no-scrollbar flex flex-1 flex-col gap-2 overflow-hidden overflow-y-auto">
+          {shoppingCart.map((product) => (
+            <div
+              key={product.id}
+              className="relative flex items-center gap-2 rounded-lg border p-2"
+            >
+              <Button
+                onClick={() => handleRemoveShoppingCartItem(product.id)}
+                className="absolute right-0 top-0"
+                variant="link"
+                size="icon"
+              >
+                <XIcon className="h-4 w-4" />
               </Button>
-            </SheetClose>
-          </div>
 
-          <nav className="space-y-8">
-            <div className="flex flex-col gap-1">
-              <h3 className="mb-2 px-4 font-semibold">Apresentação</h3>
+              <Image
+                src={product.cover_img_url}
+                alt={product.name}
+                height={40}
+                width={50}
+                className="h-16 w-12 object-cover"
+              />
+              <div>
+                <h3 className="w-52 truncate">{product.name}</h3>
+                {product.discount_percentage ? (
+                  <div className="flex items-center gap-2">
+                    <span>
+                      R$
+                      {calcPrice(product.price, product.discount_percentage)}
+                      <span className="ml-1 text-xs text-foreground/60 line-through">
+                        {product.price}
+                      </span>
+                    </span>
 
-              <SheetClose asChild>
-                <Link href="/welcome">
-                  <Button
-                    className="w-full justify-start"
-                    variant={pathname === "/welcome" ? "secondary" : "ghost"}
-                  >
-                    <PartyPopperIcon className="mr-2 w-4" /> Boas vindas
-                  </Button>
-                </Link>
-              </SheetClose>
+                    <div className="rounded-lg border px-1 text-xs">
+                      -{product.discount_percentage}%
+                    </div>
+                  </div>
+                ) : (
+                  <span>R${product.price}</span>
+                )}
+              </div>
             </div>
-
-            <div className="flex flex-col gap-1">
-              <h3 className="mb-2 px-4 font-semibold">Descubra</h3>
-              <SheetClose asChild>
-                <Link href="/newgroup">
-                  <Button
-                    className="w-full justify-start"
-                    variant={pathname === "/newgroup" ? "secondary" : "ghost"}
-                  >
-                    <BadgePlusIcon className="mr-2 w-4" /> Criar grupos
-                  </Button>
-                </Link>
-              </SheetClose>
-
-              <SheetClose asChild>
-                <Link href="/joingroup">
-                  <Button
-                    className="w-full justify-start"
-                    variant={pathname === "/joingroup" ? "secondary" : "ghost"}
-                  >
-                    <UserPlus2Icon className="mr-2 w-4" /> Entrar em grupos
-                  </Button>
-                </Link>
-              </SheetClose>
-
-              <SheetClose asChild>
-                <Link href="/notifications">
-                  <Button
-                    className="w-full justify-start"
-                    variant={
-                      pathname === "/notifications" ? "secondary" : "ghost"
-                    }
-                  >
-                    <Bell className="mr-2 w-4" /> Notificações
-                  </Button>
-                </Link>
-              </SheetClose>
-            </div>
-          </nav>
-        </ScrollArea>
+          ))}
+        </div>
+        <BuyNowButton buttonText="Finalizar compra" />
       </SheetContent>
     </Sheet>
   );

@@ -2,7 +2,7 @@
 
 import { useContext } from "react";
 
-import { ShoppingCartIcon } from "lucide-react";
+import { ShoppingCartIcon, XIcon } from "lucide-react";
 import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
@@ -26,8 +26,16 @@ export default function HeaderShoppingCart() {
           {shoppingCart.map((product) => (
             <div
               key={product.id}
-              className="flex items-center gap-2 rounded-lg border p-2"
+              className="relative flex items-center gap-2 rounded-lg border p-2"
             >
+              <Button
+                className="absolute right-0 top-0"
+                variant="ghost"
+                size="icon"
+              >
+                <XIcon className="h-4 w-4" />
+              </Button>
+
               <Image
                 src={product.cover_img_url}
                 alt={product.name}
@@ -36,9 +44,9 @@ export default function HeaderShoppingCart() {
                 className="h-16 w-12 object-cover"
               />
               <div>
-                <h3>{product.name}</h3>
+                <h3 className="w-52 truncate">{product.name}</h3>
                 {product.discount_percentage ? (
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
                     <span>
                       R${calcPrice(product.price, product.discount_percentage)}
                       <span className="ml-1 text-xs text-foreground/60 line-through">
