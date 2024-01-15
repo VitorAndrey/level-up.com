@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { ShoppingCartIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { BuyNowButton } from "@/components/ui/buy-now-button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ShoppingCartContext } from "@/contexts/ShoppingCartContext";
 
@@ -24,8 +25,7 @@ export default function HeaderShoppingCart() {
             <p key={product.id}>{product.name}</p>
           ))}
         </div>
-
-        <Button className="w-full">Finalizar compra</Button>
+        <BuyNowButton buttonText="Finalizar compra" />
       </SheetContent>
     </Sheet>
   );

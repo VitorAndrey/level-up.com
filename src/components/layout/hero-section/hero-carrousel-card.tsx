@@ -23,12 +23,6 @@ export default function HeroCarrouselCard({ game }: HeroCarrouselCardProps) {
 
       <div className="absolute bottom-8 left-8 flex flex-col gap-2">
         <h3 className="text-lg font-semibold text-white">{game.name}</h3>
-        <Link
-          href={`games/${game.id}`}
-          className={cn(buttonVariants({ variant: "secondary" }), "max-w-max")}
-        >
-          Comprar
-        </Link>
       </div>
     </div>
   );

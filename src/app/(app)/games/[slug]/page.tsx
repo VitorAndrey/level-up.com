@@ -2,7 +2,6 @@ import { StarIcon } from "lucide-react";
 import Image from "next/image";
 
 import { AddToCartButton } from "@/components/ui/add-to-cart-button";
-import { Button } from "@/components/ui/button";
 import { BuyNowButton } from "@/components/ui/buy-now-button";
 import { getGameBySlug } from "@/services/games/getGamesBySlug";
 import { calcPrice } from "@/utils/calcPrice";

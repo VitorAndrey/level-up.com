@@ -2,14 +2,16 @@
 
 import { useEffect, useState } from "react";
 
-import { SearchIcon } from "lucide-react";
+import { SearchIcon, XIcon } from "lucide-react";
 
 import { HeaderSearchBarItem } from "./header-search-bar-item";
+import { Button } from "@/components/ui/button";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Game } from "@/types/games";
 
@@ -20,6 +22,7 @@ type HeaderSearchBarProps = {
 export function HeaderSearchBar({ products }: HeaderSearchBarProps) {
   const [inputValue, setInputValue] = useState<string>("");
   const [filteredList, setFilteredList] = useState<Game[]>(products);
+  const [open, setOpen] = useState(false);
 
   function handleUpdateFilteredList() {
     if (!inputValue) return setFilteredList(products);
@@ -31,14 +34,19 @@ export function HeaderSearchBar({ products }: HeaderSearchBarProps) {
     setFilteredList(filteredList.slice(0, 5));
   }
 
+  function handleCloseInput() {
+    setOpen(false);
+    setInputValue("");
+  }
+
   useEffect(() => {
     handleUpdateFilteredList();
-  }, [inputValue, products]); // Adicionando 'inputValue' e 'products' como dependências
+  }, [inputValue, products]);
 
   return (
     <div className="sticky top-0 z-50 mx-auto flex max-w-6xl items-center gap-1 bg-background px-2 py-6">
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
+      <Dialog open={open}>
+        <DialogTrigger onClick={() => setOpen(true)} asChild>
           <div className="relative flex items-center">
             <Input
               value={inputValue}
@@ -48,13 +56,37 @@ export function HeaderSearchBar({ products }: HeaderSearchBarProps) {
             />
             <SearchIcon className="absolute left-4" size={14} />
           </div>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className="h-64 w-96" align="start" forceMount>
-          {filteredList.map((product) => (
-            <HeaderSearchBarItem key={product.id} product={product} />
-          ))}
-        </DropdownMenuContent>
-      </DropdownMenu>
+        </DialogTrigger>
+        <DialogContent className="h-96 overflow-hidden py-6 sm:max-w-[525px]">
+          <Button
+            className="absolute right-6 top-6"
+            variant="outline"
+            size="icon"
+            onClick={handleCloseInput}
+          >
+            <XIcon size={14} />
+          </Button>
+
+          <Input
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            className="z-50 w-full max-w-56 rounded-full"
+            placeholder="Pesquisar na loja"
+          />
+
+          <div className="no-scrollbar flex h-96 w-full flex-col overflow-hidden overflow-y-auto pb-8">
+            {filteredList.map((product) => (
+              <DialogClose
+                className="my-2 text-left"
+                key={product.id}
+                onClick={handleCloseInput}
+              >
+                <HeaderSearchBarItem product={product} />
+              </DialogClose>
+            ))}
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
