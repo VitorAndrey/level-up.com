@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { GameWithRating } from "@/types/games";
+import { Game, GameWithRating } from "@/types/games";
 import { calcPrice } from "@/utils/calcPrice";
 
 type ProductsCardProps = {
-  product: GameWithRating;
+  product: Game | GameWithRating;
 };
 
 export function ProductsCard({ product }: ProductsCardProps) {

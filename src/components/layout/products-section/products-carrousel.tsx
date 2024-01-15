@@ -6,10 +6,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/free-mode";
 import { ProductsCard } from "./products-card";
-import { GameWithRating } from "@/types/games";
+import { Game, GameWithRating } from "@/types/games";
 
 type ProductsCarrouselProps = {
-  products: GameWithRating[];
+  products: Game[] | GameWithRating[];
 };
 
 export function ProductsCarrousel({ products }: ProductsCarrouselProps) {

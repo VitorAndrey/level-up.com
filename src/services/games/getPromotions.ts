@@ -1,7 +1,7 @@
 import prisma from "@/lib/prisma";
 import { Game } from "@/types/games";
 
-export async function getHeroPromotions(): Promise<Game[]> {
+export async function getPromotions(): Promise<Game[]> {
   const gamesWithDynamicAverageRating = await prisma.game.findMany({
     where: {
       discount_percentage: {
@@ -9,9 +9,8 @@ export async function getHeroPromotions(): Promise<Game[]> {
       },
     },
     orderBy: {
-      discount_percentage: "desc",
+      discount_percentage: "asc",
     },
-    take: 5,
   });
 
   return gamesWithDynamicAverageRating;

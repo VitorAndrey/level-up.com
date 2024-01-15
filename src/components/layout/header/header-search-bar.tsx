@@ -57,9 +57,9 @@ export function HeaderSearchBar({ products }: HeaderSearchBarProps) {
             <SearchIcon className="absolute left-4" size={14} />
           </div>
         </DialogTrigger>
-        <DialogContent className="h-96 overflow-hidden py-6 sm:max-w-[525px]">
+        <DialogContent className="h-full w-full overflow-hidden py-6 sm:max-h-96 sm:max-w-[525px]">
           <Button
-            className="absolute right-6 top-6"
+            className="absolute right-6 top-6 rounded-3xl"
             variant="outline"
             size="icon"
             onClick={handleCloseInput}
@@ -74,7 +74,7 @@ export function HeaderSearchBar({ products }: HeaderSearchBarProps) {
             placeholder="Pesquisar na loja"
           />
 
-          <div className="no-scrollbar flex h-96 w-full flex-col overflow-hidden overflow-y-auto pb-8">
+          <div className="no-scrollbar flex h-full w-full flex-col overflow-hidden overflow-y-auto pb-8">
             {filteredList.map((product) => (
               <DialogClose
                 className="my-2 text-left"

@@ -1,9 +1,11 @@
 import { StarIcon } from "lucide-react";
 import Image from "next/image";
 
+import { ProductsCarrousel } from "@/components/layout/products-section/products-carrousel";
 import { AddToCartButton } from "@/components/ui/add-to-cart-button";
 import { BuyNowButton } from "@/components/ui/buy-now-button";
 import { getGameBySlug } from "@/services/games/getGamesBySlug";
+import { getPromotions } from "@/services/games/getPromotions";
 import { calcPrice } from "@/utils/calcPrice";
 
 interface ParamsTypes {
@@ -14,6 +16,7 @@ interface ParamsTypes {
 
 export default async function GamesProductPage({ params }: ParamsTypes) {
   const product = await getGameBySlug(params.slug);
+  const promotions = await getPromotions();
 
   if (!product) return <p>Loading..</p>;
 
@@ -76,7 +79,10 @@ export default async function GamesProductPage({ params }: ParamsTypes) {
         </div>
       </div>
 
-      <div>Comments section</div>
+      <div className="py-12">Comments section</div>
+
+      <h3 className="mb-4 pl-2 text-lg font-semibold">Talvez você goste</h3>
+      <ProductsCarrousel products={promotions} />
     </section>
   );
 }
