@@ -17,7 +17,7 @@ export default function HeroCarrouselCard({ game }: HeroCarrouselCardProps) {
         src={game.banner_img}
         alt={game.name}
         height={460}
-        width={680}
+        width={720}
         className="h-full w-full object-cover brightness-[.4]"
       />
 
