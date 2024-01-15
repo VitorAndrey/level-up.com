@@ -1,3 +1,5 @@
+"use client";
+
 import React, { FormEvent, useEffect, useState } from "react";
 
 import { LoaderIcon } from "lucide-react";
