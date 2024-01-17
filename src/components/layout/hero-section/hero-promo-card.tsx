@@ -47,7 +47,7 @@ export function HeroPromoCard({
     <button
       data-active={isActive}
       onClick={handleClick}
-      className="relative flex min-w-40 items-center gap-2 overflow-hidden rounded-2xl p-3 hover:bg-zinc-100 data-[active=true]:bg-zinc-100 md:min-w-0"
+      className="relative flex min-w-40 items-center gap-2 overflow-hidden rounded-2xl p-3 hover:bg-zinc-100 data-[active=true]:bg-zinc-100 dark:hover:bg-zinc-400  dark:data-[active=true]:bg-zinc-400 md:min-w-0"
     >
       <Image
         src={imageUrl}
@@ -62,7 +62,7 @@ export function HeroPromoCard({
       <div
         ref={animationRef}
         onAnimationEnd={handleAnimationEnd}
-        className="absolute inset-0 rounded-xl bg-zinc-300"
+        className="absolute inset-0 rounded-xl bg-zinc-200 dark:bg-zinc-500"
         style={{
           width: "0%",
         }}
