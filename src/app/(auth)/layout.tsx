@@ -32,10 +32,9 @@ export default async function AuthLayout({ children }: AuthLayoutProps) {
         <div className="relative z-20 mt-auto">
           <blockquote className="space-y-2">
             <p className="text-lg">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi
-              modi et quam maiores laboriosam deserunt!
+              Tenha acesso a jogos incríveis e eleve sua experiência gamer para
+              o próximo level.
             </p>
-            <footer className="text-sm">Vitor Andrey</footer>
           </blockquote>
         </div>
       </div>
